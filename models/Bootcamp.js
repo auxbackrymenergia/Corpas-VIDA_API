@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
-const geocoder = require('../utils/geocoder');
+//const slugify = require('slugify');
+//const geocoder = require('../utils/geocoder');
 
 const BootcampSchema = new mongoose.Schema(
   {
@@ -118,7 +118,7 @@ BootcampSchema.pre('save', function (next) {
 });
 
 //Geocode & create location field
-BootcampSchema.pre('save', async function (next) {
+/*BootcampSchema.pre('save', async function (next) {
   const loc = await geocoder.geocode(this.address);
   this.location = {
     type: 'Point',
@@ -134,7 +134,7 @@ BootcampSchema.pre('save', async function (next) {
   // Do not save address in DB
   this.address = undefined;
   next();
-});
+});*/
 
 // Cascade delete courses when a bootcamp is deleted
 BootcampSchema.pre('remove', async function (next) {
