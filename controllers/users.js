@@ -1,7 +1,7 @@
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 //const User = require('../models/User');
-const Usuario = require('../models/Usuario');
+const Vacuna = require('../models/Vacuna');
 
 //@desc     Get all users
 //@route    GET /api/v1/auth/user
@@ -14,11 +14,11 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 //@route    GET /api/v1/auth/user/:id
 //@access   Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {
-  const user = await Usuario.findById(req.params.id);
+  const vacuna = await Vacuna.findById(req.params.id);
 
   res.status(200).json({
     success: true,
-    data: user,
+    data: vacuna,
   });
 });
 
@@ -26,11 +26,11 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 //@route    POST /api/v1/auth/user/:id
 //@access   Private/Admin
 exports.createUser = asyncHandler(async (req, res, next) => {
-  const user = await Usuario.create(req.body);
+  const vacuna = await Vacuna.create(req.body);
 
   res.status(201).json({
     success: true,
-    data: user,
+    data: vacuna,
   });
 });
 
@@ -38,7 +38,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 //@route    PUT /api/v1/auth/user/:id
 //@access   Private/Admin
 exports.updateUser = asyncHandler(async (req, res, next) => {
-  const user = await Usuario.findByIdAndUpdate(req.params.id, req.body, {
+  const vacuna = await Vacuna.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
@@ -46,7 +46,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: user,
+    data: vacuna,
   });
 });
 
@@ -54,7 +54,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 //@route    DELETE /api/v1/auth/user/:id
 //@access   Private/Admin
 exports.deleteUser = asyncHandler(async (req, res, next) => {
-  await Usuario.findOneAndDelete(req.params.id);
+  await Vacuna.findOneAndDelete(req.params.id);
 
   res.status(200).json({
     success: true,

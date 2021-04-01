@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async');
 const ErrorResponse = require('../utils/errorResponse');
-const User = require('../models/User');
+const Vacuna = require('../models/Vacuna');
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -27,7 +27,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     //Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = await User.findById(decoded.id);
+    req.vacuna = await Vacuna.findById(decoded.id);
 
     next();
   } catch (err) {
@@ -39,11 +39,11 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
 exports.authorize = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(req.vacuna.role)) {
       return next(
         new ErrorResponse(
-          'User role ' +
-            req.user.role +
+          'Vacuna role ' +
+            req.vacuna.role +
             ' is not authorized to access this route',
           401
         )

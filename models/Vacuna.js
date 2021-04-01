@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const VcunaSchema = new mongoose.Schema({
 
     correo: {
         type: String,
@@ -97,4 +97,4 @@ const UserSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Usuario', UserSchema);
+module.exports = mongoose.model('Vacuna', VcunaSchema);

@@ -8,7 +8,7 @@ const {
   deleteUser,
 } = require('../controllers/users');
 
-const User = require('../models/User');
+const Vacuna = require('../models/Vacuna');
 
 const router = express.Router({ mergeParams: true });
 
@@ -17,7 +17,7 @@ const advancedResults = require('../middleware/advancedResults');
 
 //router.use(protect, authorize('admin'));
 
-router.route('/').get(advancedResults(User), getUsers).post(createUser);
+router.route('/').get(advancedResults(Vacuna), getUsers).post(createUser);
 
 router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
 
