@@ -1,12 +1,12 @@
 const express = require('express');
 
 const {
-  getUsers,
-  getUser,
-  createUser,
-  updateUser,
-  deleteUser,
-} = require('../controllers/users');
+  getVacunas,
+  getVacuna,
+  createVacuna,
+  updateVacuna,
+  deleteVacuna,
+} = require('../controllers/vacunas');
 
 const Vacuna = require('../models/Vacuna');
 
@@ -17,8 +17,8 @@ const advancedResults = require('../middleware/advancedResults');
 
 //router.use(protect, authorize('admin'));
 
-router.route('/').get(advancedResults(Vacuna), getUsers).post(createUser);
+router.route('/').get(advancedResults(Vacuna), getVacunas).post(createVacuna);
 
-router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
+router.route('/:id').get(getVacuna).put(updateVacuna).delete(deleteVacuna);
 
 module.exports = router;
