@@ -1,63 +1,59 @@
-const ErrorResponse = require('../utils/errorResponse');
-const asyncHandler = require('../middleware/async');
-//const User = require('../models/User');
-const Vacuna = require('../models/Vacuna');
 
-//@desc     Get all users
-//@route    GET /api/v1/auth/user
-//@access   Private/Admin
-exports.getVacunas = asyncHandler(async (req, res, next) => {
-  res.status(200).json(res.advancedResults);
-});
+const Vacuna = require("../models/Vacuna");
 
-//@desc     Get single user
-//@route    GET /api/v1/auth/user/:id
-//@access   Private/Admin
-exports.getVacuna = asyncHandler(async (req, res, next) => {
-  const vacuna = await Vacuna.findById(req.params.id);
+exports.getVacunas = async (req, res, next)=>{
+    try{
+        const vacunas = await Vacuna.find();
+        res.status(200).json({
+            success: true,
+            data: vacunas
+        });
+    }
+    catch(err){
+        res.status(400).json({success: false});
+    }
+};
 
-  res.status(200).json({
-    success: true,
-    data: vacuna,
-  });
-});
+exports.getVacuna = (req, res, next)=>{
+    
+    res.status(200).json({
+        success: true,
+        msg: `get vacuna ${req.params.ids}`
+    });
+};
 
-//@desc     Create user
-//@route    POST /api/v1/auth/user/:id
-//@access   Private/Admin
-exports.createVacuna = asyncHandler(async (req, res, next) => {
-  const vacuna = await Vacuna.create(req.body);
 
-  res.status(201).json({
-    success: true,
-    data: vacuna,
-  });
-});
+exports.createVacuna = async (req, res, next)=>{
+    /*console.log(req.body);
+    res.status(200).json({
+        success: true,
+        msg: "Create new bootcamp"
+    });*/
+    
 
-//@desc     Update user
-//@route    PUT /api/v1/auth/user/:id
-//@access   Private/Admin
-exports.updateVacuna = asyncHandler(async (req, res, next) => {
-  const vacuna = await Vacuna.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  
+    try{
+        const vacuna = await Vacuna.create(req.body);
 
-  res.status(200).json({
-    success: true,
-    data: vacuna,
-  });
-});
+        res.status(201).json({
+            success: true,
+            data: vacuna
+        });
+    }
+    catch(err){
+        res.status(400).json({success: false});
+    }
+};
 
-//@desc     Delete user
-//@route    DELETE /api/v1/auth/user/:id
-//@access   Private/Admin
-exports.deleteVacuna = asyncHandler(async (req, res, next) => {
-  await Vacuna.findOneAndDelete(req.params.id);
+exports.updateVacuna = (req, res, next)=>{
+    res.status(200).json({
+        success: true,
+        msg: `Update vacuna ${req.params.id}`
+    });   
+};
 
-  res.status(200).json({
-    success: true,
-    data: {},
-  });
-});
+exports.deleteVacuna = (req, res, next)=>{
+    res.status(200).json({
+        success: true,
+        msg: `Delete vacuna ${req.params.id}`
+    });   
+}

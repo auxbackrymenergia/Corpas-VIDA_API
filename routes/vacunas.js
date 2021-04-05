@@ -1,24 +1,62 @@
 const express = require('express');
-
+const router = express.Router();
 const {
-  getVacunas,
-  getVacuna,
-  createVacuna,
-  updateVacuna,
-  deleteVacuna,
+    getVacuna,
+    getVacunas,
+    createVacuna,
+    updateVacuna,
+    deleteVacuna
 } = require('../controllers/vacunas');
 
-const Vacuna = require('../models/Vacuna');
 
-const router = express.Router({ mergeParams: true });
+router
+    .route('/')
+    .get(getVacunas)
+    .post(createVacuna)
 
-const { protect, authorize } = require('../middleware/auth');
-const advancedResults = require('../middleware/advancedResults');
+router
+    .route('/:id')
+    .get(getVacuna)
+    .put(updateVacuna)
+    .delete(deleteVacuna);
+/*
+router.get('/', (req, res) => {
+    //res.send('<h1>Hello from express</h1>');
+    //res.send({name: "Miguel"});
+    //res.json({name: "Miguel"});
+    //res.status(400).json({ succes: false });
+    res.status(200).json({
+        success: true,
+        msg: 'Show all bootcamps'
+    });
+});
 
-//router.use(protect, authorize('admin'));
+router.get('/:id', (req, res) => {
+    res.status(200).json({
+        success: true,
+        msg: `get bootcamp ${req.params.id}`
+    });
+});
 
-router.route('/').get(advancedResults(Vacuna), getVacunas).post(createVacuna);
+router.post('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        msg: "Create new bootcamp"
+    });
+});
 
-router.route('/:id').get(getVacuna).put(updateVacuna).delete(deleteVacuna);
+router.put('/:id', (req, res) => {
+    res.status(200).json({
+        success: true,
+        msg: `Update bootcamp ${req.params.id}`
+    });    
+});
+
+router.delete('/:id', (req, res) => {
+    res.status(200).json({
+        success: true,
+        msg: `Delete bootcamp ${req.params.id}`
+    });    
+});*/
 
 module.exports = router;
